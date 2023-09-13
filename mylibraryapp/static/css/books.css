@@ -1,0 +1,18 @@
+.card--book {
+    height: 100%;
+}
+
+.card-text--summary {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.detail-container {
+    max-width: 950px;
+    width: 90%;
+    margin: 2rem auto;
+    padding: 1% 2%;
+}

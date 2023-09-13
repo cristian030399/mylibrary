@@ -9,10 +9,8 @@ def show_signup_form(request):
 
 
 def create_user(request):
-    print('Create user')
     try:
         username = request.POST["username"]
-        print(username)
         email = request.POST["email"]
         password = request.POST["password"]
         userExist = User.objects.filter(username=username).exists()
@@ -25,9 +23,6 @@ def create_user(request):
         return render(request, 'registration/signup.html', {
             "error_message": "Complete all fields.",
         })
-    else:
-        print('==============')
-        print(userExist)
-        
+    else:        
         newUser.save()
         return HttpResponseRedirect(reverse('auth:login'))

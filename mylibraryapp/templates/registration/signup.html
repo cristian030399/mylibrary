@@ -1,28 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Sign In{% endblock %}
 
+<!-- Estilos -->
+{% block headLinks %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/auth.css' %}">
+{% endblock %}
+
+<!-- Contenido -->
 {% block content %}
-<h2>Log In</h2>
-<form method="post" action="{% url 'auth:create' %}">
-  {% csrf_token %}
-  <p>
-    <label for="id_username">Username:</label>
-    <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required
-      id="id_username">
-  </p>
-  <p>
-    <label for="id_email">Email:</label>
-    <input type="email" name="email" autofocus autocapitalize="none" autocomplete="email" maxlength="150" required
-      id="id_email">
-  </p>
-  <p>
-    <label for="id_password">Password:</label>
-    <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
-  </p>
-  {% if error_message %}
-  <p><strong>{{ error_message }}</strong></p>
-  {% endif %}
-  <button type="submit">Log In</button>
-</form>
+<div class="container-form mt-5  p-4 border rounded">
+  <h2 class="text-center">MyLibrary</h2>
+  <h3>Sign up</h3>
+  <form method="post" action="{% url 'auth:create' %}" class="auth-form">
+    {% csrf_token %}
+    <div>
+      <label for="id_username">Username:</label>
+      <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150"
+        required id="id_username">
+    </div>
+    <div>
+      <label for="id_email">Email:</label>
+      <input type="email" name="email" autofocus autocapitalize="none" autocomplete="email" maxlength="150" required
+        id="id_email">
+    </div>
+    <div>
+      <label for="id_password">Password:</label>
+      <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+    </div>
+    {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Sign up</button>
+    <a href="{% url 'auth:login' %}">Have an acount? Login</a>
+  </form>
+</div>
 {% endblock %}

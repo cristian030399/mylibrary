@@ -1,0 +1,17 @@
+.container-form {
+    max-width: 315px;
+    width: 100%;
+    margin: auto;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.auth-form div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

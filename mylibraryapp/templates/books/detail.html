@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book{% endblock %}
+<!-- Estilos -->
+{% block headLinks %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/books.css' %}">
+{% endblock %}
+
+<!-- Contenido -->
+{% block content %}
+<div class="detail-container border rounded">
+    <h1>{{book.name}}</h1>
+    <p><i>{{book.author}}</i></p>
+    <p>{{book.pages}} pages</p>
+    <p>{{book.summary}}</p>
+    <p>{{ request.GET.q }}</p>
+
+    {% if not book.isRented %}
+    <hr>
+    <p class="fs-5">This book is available, would you like to rent it?</p>
+    <form action="{% url 'reservations:reservations' %}" method="post">
+        {% csrf_token %}
+        <input class="d-none" type="number" name="book" id="book_id" value="{{book.id}}">
+        <div class="input-group mb-3">
+            <input type="date" class="form-control" name="date_finish" id="date_finish_id placeholder="Book return day" aria-label="Book return day"
+                aria-describedby="button-addon2">
+            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Rent</button>
+        </div>
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </form>
+</div>
+{% endif %}
+{% endblock %}

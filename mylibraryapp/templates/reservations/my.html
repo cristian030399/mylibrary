@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Reservations{% endblock %}
+
+<!-- Estilos -->
+{% block headLinks %}
+<!-- <link rel="stylesheet" type='text/css' href="{% static 'css/books.css' %}"> -->
+{% endblock %}
+
+<!-- Contenido -->
+{% block content %}
+<div class="container-md mt-3">
+    <h1>My rented books</h1>
+    {% if reservations %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Book name</th>
+                <th scope="col">Rent day</th>
+                <th scope="col">Return day</th>
+                <th scope="col">Returned</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{reservation.id}}</td>
+                <td><a href="{% url 'books:detail' reservation.book.id %}">{{reservation.book.name}}</a></td>
+                <td>{{reservation.date_start}}</td>
+                <td>{{reservation.date_finish}}</td>
+                {% if reservation.was_returned %}
+                <td>
+                    Yes
+                </td>
+                <td></td>
+                {% else %}
+                <td>
+                    No
+                </td>
+                <td>
+                    <form action="{% url 'reservations:return' reservation.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Return book</button>
+                    </form>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>You haven't rented any books yet</p>
+    {% endif %}
+</div>
+{% endblock %}
