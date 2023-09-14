@@ -46,7 +46,7 @@ class MyReservationsView(LoginRequiredMixin, generic.ListView):
         user = self.request.user
         return Reservation.objects.filter(user = user.id)
 
-
+@login_required(())
 def returnBook(request, reservation_id):
     reservation = get_object_or_404(Reservation, pk=reservation_id)
     reservation.was_returned = True

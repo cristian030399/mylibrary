@@ -23,6 +23,7 @@ urlpatterns = [
     path('auth/', include('users.urls')),
     path('books/', include('books.urls')),
     path('reservations/', include('reservations.urls')),
+    path('admin-site', views.showAdmin, name='admin'),
     path('', views.index, name='home'),
 
 ]
